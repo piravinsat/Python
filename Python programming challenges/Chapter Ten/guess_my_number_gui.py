@@ -67,33 +67,25 @@ class Application(Frame):
         if guess > theNumber:
             # Fill text box with "Lower"
             message = "LOWER"      
-            self.game_txt.delete(0.0, END)
-            self.game_txt.insert(0.0, message)
             tries += 1
-            print(tries)
         elif guess < theNumber:
             # Fill text box with "Higher"
             message = "HIGHER"
-            self.game_txt.delete(0.0, END)
-            self.game_txt.insert(0.0, message)
             tries += 1
-            print(tries)
 
         # congratulating the player
         # Fill text box with a "You guessed it!", the number of tries
         # and the number
         elif guess == theNumber and tries < limit:
+            tries += 1
             message = "You guessed it! The number of tries is "
             message += str(tries)
-
-            self.game_txt.delete(0.0, END)
-            self.game_txt.insert(0.0, message)
 
         else:
             message = "Run out of tries, sorry!"
 
-            self.game_txt.delete(0.0, END)
-            self.game_txt.insert(0.0, message)
+        self.game_txt.delete(0.0, END)
+        self.game_txt.insert(0.0, message)
 
 # main
 root = Tk()
