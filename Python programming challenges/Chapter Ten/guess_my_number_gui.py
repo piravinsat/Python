@@ -8,6 +8,9 @@
 from tkinter import *
 import random
 
+theNumber = random.randint(1,100)
+tries = 0
+
 class Application(Frame):
     """ GUI application that embeds the Guess My Number game. """
     def __init__(self, master):
@@ -53,27 +56,44 @@ class Application(Frame):
         """Fill text box with message based on the guess input. """
 
         # set the initial values
-        theNumber = random.randint(1,100)
-        tries = 1
         limit = 6
+        global tries
+        global theNumber
+        print(theNumber)
         
         # get values from the GUI
         guess = int(self.guess_ent.get())
 
-        while guess != theNumber:
-            if guess > theNumber:
-                # Fill text box with "Lower"
-            else:
-                # Fill text box with "Higher"
-
+        if guess > theNumber:
+            # Fill text box with "Lower"
+            message = "LOWER"      
+            self.game_txt.delete(0.0, END)
+            self.game_txt.insert(0.0, message)
             tries += 1
-
-            if tries == limit:
-                break
+            print(tries)
+        elif guess < theNumber:
+            # Fill text box with "Higher"
+            message = "HIGHER"
+            self.game_txt.delete(0.0, END)
+            self.game_txt.insert(0.0, message)
+            tries += 1
+            print(tries)
 
         # congratulating the player
-                # Fill text box with a "You guessed it!", the number of tries
-                # and the number
+        # Fill text box with a "You guessed it!", the number of tries
+        # and the number
+        elif guess == theNumber and tries < limit:
+            message = "You guessed it! The number of tries is "
+            message += str(tries)
+
+            self.game_txt.delete(0.0, END)
+            self.game_txt.insert(0.0, message)
+
+        else:
+            message = "Run out of tries, sorry!"
+
+            self.game_txt.delete(0.0, END)
+            self.game_txt.insert(0.0, message)
 
 # main
 root = Tk()
